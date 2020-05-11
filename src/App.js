@@ -1,35 +1,34 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "@material-ui/core";
+import { CardList } from "./components/card-list/card-list";
+/*import logo from "./logo.svg";
+import { Button } from "@material-ui/core";*/
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      monsters: [
-        {
-          name: "Frankenstein",
-          id: "asc1",
-        },
-        {
-          name: "Dracula",
-          id: "asr2",
-        },
-        {
-          name: "Zombie",
-          id: "asl3",
-        },
-      ],
+      monsters: [],
+      searchField: "",
     };
   }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((users) => this.setState({ monsters: users }));
+  }
+
   render() {
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => (
-          <h1 key={monster.id}>{monster.name}</h1>
-        ))}
+        <input
+          type="search"
+          placeholder="search monsters"
+          onChange={(e) => this.setState({ searchField: e.target.value })}
+        />
+        <CardList monsters={this.state.monsters} />
       </div>
     );
   }
