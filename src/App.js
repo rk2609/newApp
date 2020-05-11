@@ -8,8 +8,6 @@ class App extends Component {
     super();
 
     this.state = {
-      string: "Hello Ravi Khokher!!",
-      textId: 0,
       monsters: [
         {
           name: "Frankenstein",
